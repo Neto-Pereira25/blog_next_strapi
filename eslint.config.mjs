@@ -1,14 +1,62 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import { defineConfig } from "eslint/config";
+import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
+import react from "eslint-plugin-react";
+import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import globals from "globals";
+import tsParser from "@typescript-eslint/parser";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+    baseDirectory: __dirname,
+    recommendedConfig: js.configs.recommended,
+    allConfig: js.configs.all
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+export default defineConfig([{
+    extends: fixupConfigRules(compat.extends(
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:prettier/recommended",
+    )),
 
-export default eslintConfig;
+    plugins: {
+        react: fixupPluginRules(react),
+        "@typescript-eslint": fixupPluginRules(typescriptEslint),
+    },
+
+    languageOptions: {
+        globals: {
+            ...globals.browser,
+            ...globals.node,
+            ...globals.jest,
+        },
+
+        parser: tsParser,
+        ecmaVersion: 12,
+        sourceType: "module",
+
+        parserOptions: {
+            ecmaFeatures: {
+                jsx: true,
+            },
+        },
+    },
+
+    settings: {
+        react: {
+            version: "detect",
+        },
+    },
+
+    rules: {
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react/react-in-jsx-scope": "off",
+    },
+}]);
