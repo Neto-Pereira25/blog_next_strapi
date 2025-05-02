@@ -30,6 +30,7 @@ export type PostCoverFormat = {
   url: string;
   hash: string;
   mime: string;
+  name: string;
   path: null;
   size: number;
   width: number;
@@ -53,7 +54,7 @@ export type PostCover = PostCoverFormat & {
   updated_at: string;
   formats: {
     thumbnail: PostCoverFormat;
-    smal: PostCoverFormat;
+    small: PostCoverFormat;
     medium: PostCoverFormat;
     large: PostCoverFormat;
   };
