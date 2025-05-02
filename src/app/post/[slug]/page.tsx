@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getAllPosts } from '../../../data/posts/get-all-posts';
 import { getPost } from '../../../data/posts/get-post';
-import Link from 'next/link';
 
 type DynamicPostProps = {
   params: { slug: string };
@@ -19,10 +18,10 @@ export default async function DynamicPost({ params }: DynamicPostProps) {
   const post = posts[0];
 
   return (
-    <p>
-      {post.title}
-      <Link href="/">Retornar ao Início</Link>
-    </p>
+    <>
+      <p>{post.title}</p>
+      <p dangerouslySetInnerHTML={{ __html: post.content }} />
+    </>
   );
 }
 
