@@ -1,3 +1,4 @@
+import { Footer } from '../../components/Footer/page';
 import { Header } from '../../components/Header/page';
 import { MainContainer } from '../../components/MainContainer/page';
 import { PostCard } from '../../components/PostCard/page';
@@ -24,6 +25,7 @@ export default function HomePage({ posts }: HomePageProps) {
           ))}
         </Container>
       </MainContainer>
+      <Footer />
     </>
   );
 }
