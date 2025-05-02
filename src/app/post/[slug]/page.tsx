@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getAllPosts } from '../../../data/posts/get-all-posts';
+import { Post } from '../../../containers/Post/page';
 import { getPost } from '../../../data/posts/get-post';
 
 type DynamicPostProps = {
@@ -17,18 +17,5 @@ export default async function DynamicPost({ params }: DynamicPostProps) {
 
   const post = posts[0];
 
-  return (
-    <>
-      <p>{post.title}</p>
-      <p dangerouslySetInnerHTML={{ __html: post.content }} />
-    </>
-  );
-}
-
-export async function generateStaticParams() {
-  const posts = await getAllPosts('pagination[limit]=30');
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return <Post post={post} />;
 }
