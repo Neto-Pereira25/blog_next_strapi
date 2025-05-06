@@ -1,6 +1,26 @@
+/* eslint-disable prettier/prettier */
 module.exports = {
-  // eslint-disable-next-line prettier/prettier
-  'presets': ['next/babel'],
-  // eslint-disable-next-line prettier/prettier
-  'plugins': [['styled-components', { 'ssr': true }]],
+  "presets": ['next/babel', '@babel/preset-typescript'],
+  "plugins": [
+    [
+      'styled-components',
+      {
+        "ssr": true,
+        "displayName": true,
+      },
+    ],
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          'styled-components',
+          {
+            "ssr": false,
+            "displayName": false,
+          },
+        ],
+      ],
+    },
+  },
 };
