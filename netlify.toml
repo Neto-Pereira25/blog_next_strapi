@@ -1,4 +1,10 @@
-[build]
-  command = "npm run build"
-  functions = "out_functions"
-  publish = "out_publish"
+command = "npm run build"
+functions = "out_functions"
+publish = "out_publish"
+
+[build.environment]
+NODE_VERSION = "v22.14.0"
+NPM_VERSION = "10.9.2"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
