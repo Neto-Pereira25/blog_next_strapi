@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const posts = await getAllPosts(
-    'sort=id:desc&pagination[start]=0&pagination[limit]=30',
+    'sort=id:desc&pagination[start]=0&pagination[limit]=6',
   );
 
   return <HomePage posts={posts} />;

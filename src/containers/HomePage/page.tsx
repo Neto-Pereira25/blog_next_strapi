@@ -1,13 +1,14 @@
 import Head from 'next/head';
+import { SITE_NAME } from '../../app/config/app-config';
 import { Footer } from '../../components/Footer/page';
 import { Header } from '../../components/Header/page';
 import { MainContainer } from '../../components/MainContainer/page';
+import { Pagination } from '../../components/Pagination/page';
 import { PostCard } from '../../components/PostCard/page';
+import { PaginationData } from '../../domain/posts/pagination';
 import { PostData } from '../../domain/posts/post';
 import { Category, Container } from './styled';
-import { SITE_NAME } from '../../app/config/app-config';
-import { PaginationData } from '../../domain/posts/pagination';
-import { Pagination } from '../../components/Pagination/page';
+import Link from 'next/link';
 
 export type HomePageProps = {
   posts: PostData[];
@@ -43,6 +44,9 @@ export default function HomePage({
           ))}
         </Container>
         <Pagination {...pagination} />
+        {!pagination?.nextPage && (
+          <Link href={`/post/page/1`}>Ver todos os posts</Link>
+        )}
       </MainContainer>
       <Footer />
     </>
