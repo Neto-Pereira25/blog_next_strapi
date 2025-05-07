@@ -36,5 +36,5 @@ export default async function Page({ params }: PageProps) {
 
   if (!posts.length) return <div>Página não encontrada...</div>;
 
-  return <HomePage posts={posts} />;
+  return <HomePage posts={posts} category={category} pagination={pagination} />;
 }
